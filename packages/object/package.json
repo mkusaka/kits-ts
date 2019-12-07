@@ -1,0 +1,9 @@
+{
+  "name": "object",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.7.3"
+  }
+}

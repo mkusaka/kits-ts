@@ -1,0 +1,10 @@
+{
+  "name": "array",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.7.3"
+  }
+}

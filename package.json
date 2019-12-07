@@ -1,0 +1,28 @@
+{
+  "name": "kits-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mkusaka/kits-ts.git",
+  "author": "mkusaka <hinoshita1992@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "build:collection": "yarn workspace collection tsc index.ts",
+    "build:util": "yarn workspace util tsc index.ts",
+    "build:array": "yarn workspace array tsc index.ts",
+    "build:function": "yarn workspace function tsc index.ts",
+    "build:number": "yarn workspace number tsc index.ts",
+    "build:lang": "yarn workspace lang tsc index.ts",
+    "build:object": "yarn workspace object tsc index.ts",
+    "build:string": "yarn workspace string tsc index.ts",
+    "build:main": "yarn tsc index.ts",
+    "build": "npm-run-all --parallel build:*"
+  }
+}
