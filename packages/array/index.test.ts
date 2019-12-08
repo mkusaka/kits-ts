@@ -1,4 +1,4 @@
-import { chunk, compact, concat, difference } from "./";
+import { chunk, compact, concat, difference, drop } from "./";
 import * as _ from "lodash";
 
 describe("chunk", () => {
@@ -157,6 +157,36 @@ describe("difference", () => {
       const zero = 0 as const;
       const one = 1 as const;
       expect(difference([zero, one], [1, 2])).toEqual([0]);
+    });
+  });
+});
+
+describe("drop", () => {
+  describe("lodash compatibility test", () => {
+    it("default drop", () => {
+      expect(drop([1, 2])).toEqual(_.drop([1, 2]));
+    });
+
+    it("drop count specified", () => {
+      expect(drop([1, 2, 3], 2)).toEqual(_.drop([1, 2, 3], 2));
+    });
+
+    it("empty array", () => {
+      expect(drop([])).toEqual(_.drop([]));
+    });
+  });
+
+  describe("expected result test", () => {
+    it("default drop", () => {
+      expect(drop([1, 2])).toEqual([2]);
+    });
+
+    it("drop count specified", () => {
+      expect(drop([1, 2, 3], 2)).toEqual([3]);
+    });
+
+    it("empty array", () => {
+      expect(drop([])).toEqual([]);
     });
   });
 });

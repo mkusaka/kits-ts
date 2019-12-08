@@ -17,3 +17,7 @@ export function concat<T>(input: T[], ...rest: (T | T[])[]) {
 export function difference<T, K extends T>(one: K[], another: T[]) {
   return one.filter(e => !another.includes(e));
 }
+
+export function drop<T>(input: T[], dropCount?: number) {
+  return input.slice(dropCount || 1);
+}
