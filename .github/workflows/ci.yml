@@ -26,8 +26,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: check cache
+        run: tree node_modules
       - name: install if no-cache
-        # if: steps.yarn-restore-cache.outputs.cache-hit != 'true'
         run: yarn
       - name: build
         run: yarn run build
@@ -36,4 +37,4 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: kits-test
-          path: "*-test.json"
+          path: "**/*-test.json"
