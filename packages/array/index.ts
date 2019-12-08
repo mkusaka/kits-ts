@@ -1,4 +1,4 @@
-export function chunk<T = any>(input: T[], size: number) {
+export function chunk<T>(input: T[], size: number) {
   return input.reduce<T[][]>((arr, item, idx) => {
     return idx % size === 0
       ? [...arr, [item]]
@@ -6,7 +6,7 @@ export function chunk<T = any>(input: T[], size: number) {
   }, []);
 }
 
-export function compact<T = any>(input: T[]) {
+export function compact<T>(input: T[]) {
   return input.filter(Boolean);
 }
 
