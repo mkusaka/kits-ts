@@ -9,3 +9,5 @@ export function chunk<T = any>(input: T[], size: number) {
 export function compact<T = any>(input: T[]) {
   return input.filter(Boolean)
 }
+
+export const concat = Array.prototype.concat.bind([])

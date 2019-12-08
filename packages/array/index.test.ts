@@ -1,4 +1,4 @@
-import { chunk, compact } from './';
+import { chunk, compact, concat } from './';
 import * as _ from 'lodash';
 
 describe('chunk', () => {
@@ -83,6 +83,36 @@ describe('compact', () => {
       expect(compact(['1'])).toEqual(['1']);
       expect(compact([true])).toEqual([true]);
       expect(compact([1])).toEqual([1]);
+    });
+  });
+});
+
+describe('concat', () => {
+  describe('lodash compatibility test', () => {
+    it('one element array given', () => {
+      expect(concat([1])).toEqual(_.concat([1]));
+    });
+
+    it('concat no value array and element', () => {
+      expect(concat([] as number[], 1)).toEqual(_.concat([], 1));
+    });
+
+    it('concat array and array', () => {
+      expect(concat([0], [2])).toEqual(_.concat([0], [2]));
+    });
+  });
+
+  describe('expected result test', () => {
+    it('one element array given', () => {
+      expect(concat([1])).toEqual(_.concat([1]));
+    });
+
+    it('concat no value array and element', () => {
+      expect(concat([], 1)).toEqual(_.concat([], 1));
+    });
+
+    it('concat array and array', () => {
+      expect(concat([0], [2])).toEqual(_.concat([0], [2]));
     });
   });
 });
