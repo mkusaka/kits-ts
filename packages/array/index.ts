@@ -11,3 +11,7 @@ export function compact<T>(input: T[]) {
 }
 
 export const concat = Array.prototype.concat.bind([]);
+
+export function difference<T, K extends T>(one: K[], another: T[]) {
+  return one.filter(e => !another.includes(e));
+}

@@ -1,4 +1,4 @@
-import { chunk, compact, concat } from "./";
+import { chunk, compact, concat, difference } from "./";
 import * as _ from "lodash";
 
 describe("chunk", () => {
@@ -113,6 +113,50 @@ describe("concat", () => {
 
     it("concat array and array", () => {
       expect(concat([0], [2])).toEqual(_.concat([0], [2]));
+    });
+  });
+});
+
+describe("difference", () => {
+  describe("lodash compatibility test", () => {
+    it("same array", () => {
+      expect(difference([1], [1])).toEqual(_.difference([1], [1]));
+    });
+
+    it("blank and non blank array", () => {
+      expect(difference([], [1])).toEqual(_.difference([], [1]));
+    });
+
+    it("exactly different array", () => {
+      expect(difference([0], [2])).toEqual(_.difference([0], [2]));
+    });
+
+    it("has some shared element array", () => {
+      expect(difference([0, 1], [1, 2])).toEqual(_.difference([0, 1], [1, 2]));
+    });
+  });
+
+  describe("expected result test", () => {
+    it("same array", () => {
+      expect(difference([1], [1])).toEqual([]);
+    });
+
+    it("blank and non blank array", () => {
+      expect(difference([], [1])).toEqual([]);
+    });
+
+    it("exactly different array", () => {
+      expect(difference([0], [2])).toEqual([0]);
+    });
+
+    it("has some shared element array", () => {
+      expect(difference([0, 1], [1, 2])).toEqual([0]);
+    });
+
+    it("extended type check", () => {
+      const zero = 0 as const;
+      const one = 1 as const;
+      expect(difference([zero, one], [1, 2])).toEqual([0]);
     });
   });
 });
