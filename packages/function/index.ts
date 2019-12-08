@@ -8,6 +8,12 @@ export function after(callCount: number, callback: (...args: any[]) => any) {
   };
 }
 
+/**
+ * TODO: fix ts type error
+ * @param f
+ * @param wait
+ * @param immediate
+ */
 export function debounce<T extends (...args: any[]) => any>(
   f: T,
   wait: number,
@@ -21,10 +27,12 @@ export function debounce<T extends (...args: any[]) => any>(
     timeout = setTimeout(function() {
       timeout = null;
       if (!immediate) {
+        // @ts-ignore
         f.apply(_this, [...args]);
       }
     }, wait);
     if (immediate && !timeout) {
+      // @ts-ignore
       f.apply(_this, [...args]);
     }
   };
