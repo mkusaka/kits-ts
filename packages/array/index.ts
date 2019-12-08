@@ -21,3 +21,7 @@ export function difference<T, K extends T>(one: K[], another: T[]) {
 export function drop<T>(input: T[], dropCount?: number) {
   return input.slice(dropCount || 1);
 }
+
+export function dropRight<T>(input: T[], dropCount?: number) {
+  return input.slice(0, -1 * (dropCount || 1));
+}
