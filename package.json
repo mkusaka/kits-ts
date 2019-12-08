@@ -38,7 +38,16 @@
     "test:lang": "yarn workspace lang run test",
     "test:object": "yarn workspace object run test",
     "test:string": "yarn workspace string run test",
-    "test": "npm-run-all --parallel test:*"
+    "test": "npm-run-all --parallel test:*",
+    "testci:collection": "yarn test:collection -- --json --outputFile=../../test/collection-test.json",
+    "testci:util": "yarn test:util -- --json --outputFile=../../test/util-test.json",
+    "testci:array": "yarn test:array -- --json --outputFile=../../test/array-test.json",
+    "testci:function": "yarn test:function -- --json --outputFile=../../test/function-test.json",
+    "testci:number": "yarn test:number -- --json --outputFile=../../test/number-test.json",
+    "testci:lang": "yarn test:lang -- --json --outputFile=../../test/lang-test.json",
+    "testci:object": "yarn test:object -- --json --outputFile=../../test/object-test.json",
+    "testci:string": "yarn test:string -- --json --outputFile=../../test/string-test.json",
+    "testci": "npm-run-all testci:*"
   },
   "husky": {
     "pre-commit": "lint-staged"
