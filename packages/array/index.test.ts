@@ -94,7 +94,7 @@ describe("concat", () => {
     });
 
     it("concat no value array and element", () => {
-      expect(concat([] as number[], 1)).toEqual(_.concat([], 1));
+      expect(concat([], 1)).toEqual(_.concat([], 1));
     });
 
     it("concat array and array", () => {
