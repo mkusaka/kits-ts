@@ -1,4 +1,4 @@
-import { chunk, compact, concat, difference, drop, dropRight } from "./";
+import { chunk, compact, concat, difference, drop, dropRight, fill } from "./";
 import * as _ from "lodash";
 
 describe("chunk", () => {
@@ -217,6 +217,38 @@ describe("dropRight", () => {
 
     it("empty array", () => {
       expect(dropRight([])).toEqual([]);
+    });
+  });
+});
+
+describe("fill", () => {
+  describe("lodash compatibility test", () => {
+    it("already filled array", () => {
+      expect(fill([1, 2], 3)).toEqual(_.fill([1, 2], 3));
+    });
+
+    it("Array constructor", () => {
+      expect(fill(Array(3), 2)).toEqual(_.fill(Array(3), 2));
+    });
+
+    it("partial fill", () => {
+      expect(fill([1, 2, 3, 4], 5, 1, 3)).toEqual(
+        _.fill([1, 2, 3, 4], 5, 1, 3)
+      );
+    });
+  });
+
+  describe("expected result test", () => {
+    it("already filled array", () => {
+      expect(fill([1, 2], 3)).toEqual([3, 3]);
+    });
+
+    it("Array constructor", () => {
+      expect(fill(Array(3), 2)).toEqual([2, 2, 2]);
+    });
+
+    it("partial fill", () => {
+      expect(fill([1, 2, 3, 4], 5, 1, 3)).toEqual([1, 5, 5, 4]);
     });
   });
 });
