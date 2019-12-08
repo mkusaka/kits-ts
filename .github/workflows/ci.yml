@@ -28,7 +28,7 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: check cache
         run: |
-          apt-get install tree
+          sudo apt-get install tree
           tree node_modules
       - name: install if no-cache
         run: yarn
