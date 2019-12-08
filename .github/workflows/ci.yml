@@ -1,15 +1,14 @@
 name: test everything
 on: [push]
 
-runs-on: ${{ matrix.os }}
-strategy:
-  matrix:
-    os: [ubuntu-18.04]
-    node: [8, 10, 12]
-
 jobs:
   build-and-test:
     name: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [8, 10, 12]
     steps:
       - uses: actions/setup-node@v1
         with:
