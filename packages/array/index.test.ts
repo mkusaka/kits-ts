@@ -104,15 +104,15 @@ describe("concat", () => {
 
   describe("expected result test", () => {
     it("one element array given", () => {
-      expect(concat([1])).toEqual(_.concat([1]));
+      expect(concat([1])).toEqual([1]);
     });
 
     it("concat no value array and element", () => {
-      expect(concat([], 1)).toEqual(_.concat([], 1));
+      expect(concat([], 1)).toEqual([1]);
     });
 
     it("concat array and array", () => {
-      expect(concat([0], [2])).toEqual(_.concat([0], [2]));
+      expect(concat([0], [2])).toEqual([0, 2]);
     });
   });
 });

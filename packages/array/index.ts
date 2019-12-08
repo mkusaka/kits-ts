@@ -10,8 +10,9 @@ export function compact<T>(input: T[]) {
   return input.filter(Boolean);
 }
 
-// TODO: make this method typesafer
-export const concat = Array.prototype.concat.bind([]);
+export function concat<T>(input: T[], ...rest: (T | T[])[]) {
+  return input.concat(...rest);
+}
 
 export function difference<T, K extends T>(one: K[], another: T[]) {
   return one.filter(e => !another.includes(e));
