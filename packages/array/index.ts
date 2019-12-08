@@ -5,3 +5,7 @@ export function chunk<T = any>(input: T[], size: number) {
       : [...arr.slice(0, -1), [...arr.slice(-1)[0], item]];
   }, []);
 }
+
+export function compact<T = any>(input: T[]) {
+  return input.filter(Boolean)
+}
