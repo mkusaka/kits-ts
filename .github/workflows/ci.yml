@@ -29,7 +29,7 @@ jobs:
       - name: check cache
         run: |
           sudo apt-get install tree
-          tree node_modules
+          tree
       - name: install if no-cache
         run: yarn
       - name: build
@@ -39,4 +39,4 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: kits-test
-          path: "**/*-test.json"
+          path: "*-test.json"
