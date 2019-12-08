@@ -10,7 +10,8 @@ import {
   findIndex,
   first,
   flatten,
-  flattenDeep
+  flattenDeep,
+  fromPairs
 } from "./";
 import * as _ from "lodash";
 
@@ -516,6 +517,72 @@ describe("flattenDeep", () => {
 
     it("empty array", () => {
       expect(flattenDeep([])).toEqual([]);
+    });
+  });
+});
+
+describe("fromPairs", () => {
+  describe("lodash compatibility test", () => {
+    it("valid format", () => {
+      expect(
+        fromPairs([
+          ["a", 2],
+          ["b", 3]
+        ])
+      ).toMatchObject(
+        _.fromPairs([
+          ["a", 2],
+          ["b", 3]
+        ])
+      );
+    });
+
+    it("empty array", () => {
+      expect(fromPairs([])).toMatchObject(_.fromPairs([]));
+    });
+
+    it("another value types", () => {
+      expect(
+        fromPairs([
+          ["a", ["A", 1]],
+          ["b", ["B", 2]]
+        ])
+      ).toMatchObject(
+        _.fromPairs([
+          ["a", ["A", 1]],
+          ["b", ["B", 2]]
+        ])
+      );
+    });
+  });
+
+  describe("expected result test", () => {
+    it("valid format", () => {
+      expect(
+        fromPairs([
+          ["a", 2],
+          ["b", 3]
+        ])
+      ).toMatchObject({
+        a: 2,
+        b: 3
+      });
+    });
+
+    it("empty array", () => {
+      expect(fromPairs([])).toMatchObject({});
+    });
+
+    it("another value types", () => {
+      expect(
+        fromPairs([
+          ["a", ["A", 1]],
+          ["b", ["B", 2]]
+        ])
+      ).toMatchObject({
+        a: ["A", 1],
+        b: ["B", 2]
+      });
     });
   });
 });

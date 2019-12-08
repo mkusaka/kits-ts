@@ -52,3 +52,75 @@ export function flattenDeep<T>(input: T | T[]): T[] {
     ? input.reduce<T[]>((acc, nxt) => acc.concat(flattenDeep(nxt)), [])
     : [input];
 }
+
+export function fromPairs<K extends string, V>(input: [K, V][]) {
+  return input.reduce<{ [key: string]: V }>((acc, val) => {
+    acc[val[0]] = val[1];
+    return acc;
+  }, {});
+}
+
+export function head<T>(input: T[]) {
+  const [head, ..._] = input;
+  return head;
+}
+
+export function tail<T>(input: T[]) {
+  const [_, ...tail] = input;
+  return tail;
+}
+
+export function indexOf<T>(input: T[], targetElement: T) {
+  return input.indexOf(targetElement);
+}
+
+export function intersection<T>(...inputs: T[][]) {
+  const [head, ...tails] = inputs;
+  return tails.reduce<T[]>(
+    (acc, nxt) => acc.filter(e => nxt.includes(e)),
+    head
+  );
+}
+
+export function takeRight<T>(input: T[], takeRightCount?: number) {
+  if (takeRightCount === 0) {
+    return input.slice(0, 0);
+  }
+  return input.slice(-1 * (takeRightCount || 1));
+}
+
+export function isArray<T>(input: T[]): boolean {
+  return Array.isArray(input);
+}
+
+export function isArrayBuffer<T>(input: T[]) {
+  return input instanceof ArrayBuffer;
+}
+
+export function join<T>(input: T[], delimiter?: string) {
+  return input.join(delimiter || "");
+}
+
+export function last<T>(input: T[], takeCount?: number) {
+  if (takeCount === 0 || takeCount === undefined) {
+    return [...input].pop();
+  }
+
+  return input.slice(-1 * takeCount);
+}
+
+export function lastIndexOf<T>(input: T[], targetElement: T) {
+  return input.lastIndexOf(targetElement);
+}
+
+export function reverse<T>(input: T[]) {
+  return input.reverse();
+}
+
+export function slice<T>(input: T[], start: number, end?: number) {
+  return input.slice(start, end || 0);
+}
+
+export function without<T>(input: T[], rejectElement: T) {
+  return input.filter(e => !(e === rejectElement));
+}
