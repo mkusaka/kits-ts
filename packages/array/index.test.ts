@@ -1,4 +1,17 @@
-import { chunk, compact, concat, difference, drop, dropRight, fill } from "./";
+import {
+  chunk,
+  compact,
+  concat,
+  difference,
+  drop,
+  dropRight,
+  fill,
+  find,
+  findIndex,
+  first,
+  flatten,
+  flattenDeep
+} from "./";
 import * as _ from "lodash";
 
 describe("chunk", () => {
@@ -249,6 +262,260 @@ describe("fill", () => {
 
     it("partial fill", () => {
       expect(fill([1, 2, 3, 4], 5, 1, 3)).toEqual([1, 5, 5, 4]);
+    });
+  });
+});
+
+describe("find", () => {
+  describe("lodash compatibility test", () => {
+    it("match exist pattern", () => {
+      expect(
+        find([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.find([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+
+    it("no match pattern", () => {
+      expect(
+        find([1, 2], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.find([1, 2], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+
+    it("empty array", () => {
+      expect(
+        find([], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.find([], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+  });
+
+  describe("expected result test", () => {
+    it("match exist pattern", () => {
+      expect(
+        find([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(4);
+    });
+
+    it("no match pattern", () => {
+      expect(
+        find([1, 2], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(undefined);
+    });
+
+    it("empty array", () => {
+      expect(
+        find([], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(undefined);
+    });
+  });
+});
+
+describe("findIndex", () => {
+  describe("lodash compatibility test", () => {
+    it("match exist pattern", () => {
+      expect(
+        findIndex([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.findIndex([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+
+    it("no match pattern", () => {
+      expect(
+        findIndex([1, 2], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.findIndex([1, 2], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+
+    it("empty array", () => {
+      expect(
+        findIndex([], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(
+        _.findIndex([], (e: number) => {
+          return e > 3;
+        })
+      );
+    });
+  });
+
+  describe("expected result test", () => {
+    it("match exist pattern", () => {
+      expect(
+        findIndex([1, 2, 3, 4], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(3);
+    });
+
+    it("no match pattern", () => {
+      expect(
+        findIndex([1, 2], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(-1);
+    });
+
+    it("empty array", () => {
+      expect(
+        findIndex([], (e: number) => {
+          return e > 3;
+        })
+      ).toEqual(-1);
+    });
+  });
+});
+
+describe("first", () => {
+  describe("lodash compatibility test", () => {
+    it("default", () => {
+      expect(first([1, 2])).toEqual(_.first([1, 2]));
+    });
+
+    it("no element pattern", () => {
+      expect(first([])).toEqual(_.first([]));
+    });
+  });
+
+  describe("expected result test", () => {
+    it("default", () => {
+      expect(first([1, 2])).toEqual(1);
+    });
+
+    it("no element pattern", () => {
+      expect(first([])).toEqual(undefined);
+    });
+  });
+});
+
+describe("flatten", () => {
+  describe("lodash compatibility test", () => {
+    it("1 depth", () => {
+      expect(flatten([1, 2])).toEqual(_.flatten([1, 2]));
+    });
+
+    it("contains 2 depth", () => {
+      expect(flatten([1, [2]])).toEqual(_.flatten([1, [2]]));
+    });
+
+    it("contains 3 depth", () => {
+      expect(flatten([1, [2], [3, [4]]])).toEqual(
+        _.flatten([1, [2], [3, [4]]])
+      );
+    });
+
+    it("contains 4 depth", () => {
+      expect(flatten([1, [2], [3, [4, [5]]]])).toEqual(
+        _.flatten([1, [2], [3, [4, [5]]]])
+      );
+    });
+
+    it("empty array", () => {
+      expect(flatten([])).toEqual(_.flatten([]));
+    });
+  });
+
+  describe("expected result test", () => {
+    it("1 depth", () => {
+      expect(flatten([1, 2])).toEqual([1, 2]);
+    });
+
+    it("contains 2 depth", () => {
+      expect(flatten([1, [2]])).toEqual([1, 2]);
+    });
+
+    it("contains 3 depth", () => {
+      expect(flatten([1, [2], [3, [4]]])).toEqual([1, 2, 3, [4]]);
+    });
+
+    it("contains 4 depth", () => {
+      expect(flatten([1, [2], [3, [4, [5]]]])).toEqual([1, 2, 3, [4, [5]]]);
+    });
+
+    it("empty array", () => {
+      expect(flatten([])).toEqual([]);
+    });
+  });
+});
+
+describe("flattenDeep", () => {
+  describe("lodash compatibility test", () => {
+    it("1 depth", () => {
+      expect(flattenDeep([1, 2])).toEqual(_.flattenDeep([1, 2]));
+    });
+
+    it("contains 2 depth", () => {
+      expect(flattenDeep([1, [2]])).toEqual(_.flattenDeep([1, [2]]));
+    });
+
+    it("contains 3 depth", () => {
+      expect(flattenDeep([1, [2], [3, [4]]])).toEqual(
+        _.flattenDeep([1, [2], [3, [4]]])
+      );
+    });
+
+    it("contains 4 depth", () => {
+      expect(flattenDeep([1, [2], [3, [4, [5]]]])).toEqual(
+        _.flattenDeep([1, [2], [3, [4, [5]]]])
+      );
+    });
+
+    it("empty array", () => {
+      expect(flattenDeep([])).toEqual(_.flattenDeep([]));
+    });
+  });
+
+  describe("expected result test", () => {
+    it("1 depth", () => {
+      expect(flattenDeep([1, 2])).toEqual([1, 2]);
+    });
+
+    it("contains 2 depth", () => {
+      expect(flattenDeep([1, [2]])).toEqual([1, 2]);
+    });
+
+    it("contains 3 depth", () => {
+      expect(flattenDeep([1, [2], [3, [4]]])).toEqual([1, 2, 3, 4]);
+    });
+
+    it("contains 4 depth", () => {
+      expect(flattenDeep([1, [2], [3, [4, [5]]]])).toEqual([1, 2, 3, 4, 5]);
+    });
+
+    it("empty array", () => {
+      expect(flattenDeep([])).toEqual([]);
     });
   });
 });
